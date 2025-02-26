@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Список клієнтів{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h1 class="text-center">Список клієнтів</h1>
+  <a href="{% url 'client_create' %}" class="btn btn-success mb-3">
+    Додати клієнта
+  </a>
+  {% if clients %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ПІБ</th>
+          <th>Номер телефону</th>
+          <th>Електронна пошта</th>
+          <th>Дії</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for client in clients %}
+          <tr>
+            <td>{{ client.first_name }} {{ client.last_name }}</td>
+            <td>{{ client.phone }}</td>
+            <td>{{ client.email }}</td>
+            <td>
+              <a href="{% url 'client_edit' client.pk %}" class="btn btn-warning btn-sm">Редагувати</a>
+              <a href="{% url 'client_delete' client.pk %}" class="btn btn-danger btn-sm">Видалити</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>Немає клієнтів.</p>
+  {% endif %}
+</div>
+{% endblock %}

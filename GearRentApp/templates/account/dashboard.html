@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Панель керування{% endblock %}
+
+{% block content %}
+  <div class="container py-5">
+    <h1 class="text-center mb-4">Панель керування</h1>
+
+    <div class="alert alert-info" role="alert">
+      <strong>Ласкаво просимо!</strong> Ви можете <a href="{% url 'edit' %}" class="alert-link">редагувати свій профіль</a> або <a href="{% url 'password_change' %}" class="alert-link">змінити пароль</a>.
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-lg-4">
+        <div class="card mb-4">
+          <div class="card-header bg-success text-white">
+            <h5 class="card-title">Мої замовлення</h5>
+          </div>
+          <div class="card-body">
+            <p>Перегляньте і керуйте вашими замовленнями туристичного спорядження.</p>
+            <a href="#" class="btn btn-success">Перейти до замовлень</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card mb-4">
+          <div class="card-header bg-primary text-white">
+            <h5 class="card-title">Доступне спорядження</h5>
+          </div>
+          <div class="card-body">
+            <p>Ознайомтесь із доступним спорядженням для прокату.</p>
+            <a href="#" class="btn btn-primary">Перейти до спорядження</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card mb-4">
+          <div class="card-header bg-warning text-white">
+            <h5 class="card-title">Профіль</h5>
+          </div>
+          <div class="card-body">
+            <p>Оновіть інформацію про себе та ваші уподобання для прокату спорядження.</p>
+            <a href="{% url 'edit' %}" class="btn btn-warning">Редагувати профіль</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

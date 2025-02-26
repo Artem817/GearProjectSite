@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block title %}{{ form.instance.pk|yesno:"Редагувати клієнта,Додати клієнта" }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h1 class="text-center">
+    {{ form.instance.pk|yesno:"Редагувати клієнта,Додати клієнта" }}
+  </h1>
+  <form method="POST">
+    {% csrf_token %}
+    {% for field in form %}
+      <div class="mb-3">
+        <label class="form-label">{{ field.label }}</label>
+        {% render_field field class="form-control" %}
+        {% if field.errors %}
+          <div class="invalid-feedback d-block">
+            {{ field.errors|join:", " }}
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">
+      {{ form.instance.pk|yesno:"Оновити,Додати" }}
+    </button>
+    <a href="{% url 'client_list' %}" class="btn btn-secondary">Назад</a>
+  </form>
+</div>
+{% endblock %}

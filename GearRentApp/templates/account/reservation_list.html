@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Список Резервацій{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <h2 class="text-center">Список Резервацій</h2>
+  <a href="{% url 'reservation_create' %}" class="btn btn-primary mb-3">Створити Резервацію</a>
+  
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>Клієнт</th>
+          <th>Спорядження</th>
+          <th>Дата початку</th>
+          <th>Дата закінчення</th>
+          <th>Статус</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for reservation in reservations %}
+        <tr>
+          <td>{{ reservation.id }}</td>
+          <td>{{ reservation.client.first_name }} {{ reservation.client.last_name }}</td>
+          <td>{{ reservation.equipment.name }}</td>
+          <td>{{ reservation.rental_start_date|date:"d.m.Y" }}</td>
+          <td>{{ reservation.rental_end_date|date:"d.m.Y" }}</td>
+          <td>
+            {% if reservation.status == 'Pending' %}
+              <span class="badge badge-warning">Очікує</span>
+            {% elif reservation.status == 'Confirmed' %}
+              <span class="badge badge-success">Підтверджено</span>
+            {% elif reservation.status == 'Cancelled' %}
+              <span class="badge badge-danger">Скасовано</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="6" class="text-center">Резервацій не знайдено.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Мої оренди{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h1 class="text-center">Мої оренди</h1>
+  <a href="{% url 'rental_create' %}" class="btn btn-success mb-3">Нова оренда</a>
+  {% if rentals %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Спорядження</th>
+          <th>Початок</th>
+          <th>Кінець</th>
+          <th>Статус</th>
+          <th>Ціна</th>
+          <th>Дії</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for rental in rentals %}
+          <tr>
+            <td>{{ rental.equipment.name }}</td>
+            <td>{{ rental.rental_date|date:"d.m.Y" }}</td>
+            <td>{{ rental.return_date|date:"d.m.Y" }}</td>
+            
+            
+            <td>{{ rental.get_status_display }}</td>
+            <td>{{ rental.total_price }} грн</td>
+            <td>
+              <a href="{% url 'rental_detail' rental.pk %}" class="btn btn-info btn-sm">Деталі</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>У вас немає оренд.</p>
+  {% endif %}
+</div>
+{% endblock %}

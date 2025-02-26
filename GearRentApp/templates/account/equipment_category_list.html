@@ -1,0 +1,30 @@
+<!-- templates/account/equipment_category_list.html -->
+{% extends 'base.html' %}
+
+{% block title %}Категорії Спорядження{% endblock %}
+
+{% block content %}
+<h2>Категорії Спорядження</h2>
+<a href="{% url 'equipment_category_create' %}" class="btn btn-primary mb-3">Додати Категорію</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Назва</th>
+            <th>Опис</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for category in categories %}
+        <tr>
+            <td>{{ category.name }}</td>
+            <td>{{ category.description }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="2">Категорії не знайдено.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

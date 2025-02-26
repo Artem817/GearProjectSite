@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Обслуговування Спорядження{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <h2 class="text-center">Обслуговування Спорядження</h2>
+  <a href="{% url 'maintenance_create' %}" class="btn btn-primary mb-3">Додати Обслуговування</a>
+  
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th>Спорядження</th>
+          <th>Дата</th>
+          <th>Опис</th>
+          <th>Вартість</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for maintenance in maintenances %}
+        <tr>
+          <td>{{ maintenance.equipment.name }}</td>
+          <td>{{ maintenance.maintenance_date|date:"d.m.Y" }}</td>
+          <td>{{ maintenance.description }}</td>
+          <td>{{ maintenance.cost }} грн</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="4" class="text-center">Обслуговування не знайдено.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

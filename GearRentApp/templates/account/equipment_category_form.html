@@ -1,0 +1,14 @@
+<!-- templates/account/equipment_category_form.html -->
+{% extends 'base.html' %}
+
+{% block title %}Додати Категорію{% endblock %}
+
+{% block content %}
+<h2>Додати Категорію Спорядження</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Додати</button>
+    <a href="{% url 'equipment_category_list' %}" class="btn btn-secondary">Скасувати</a>
+</form>
+{% endblock %}
